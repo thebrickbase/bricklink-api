@@ -65,7 +65,12 @@ export class Client {
         if(er){
           reject(er);
         }
-        let data = JSON.parse(body);
+        let data;
+        try {
+          data = JSON.parse(body);
+        } catch (parseError) {
+          reject(parseError);
+        }
         if(data.meta.code >= 300) {
           console.error(init.uri);
           console.error(data.meta);
