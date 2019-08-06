@@ -68,12 +68,12 @@ export class Client {
         let data;
         try {
           data = JSON.parse(body);
+          if(data.meta.code >= 300) {
+            console.error(init.uri);
+            console.error(data.meta);
+          }  
         } catch (parseError) {
           reject(parseError);
-        }
-        if(data.meta.code >= 300) {
-          console.error(init.uri);
-          console.error(data.meta);
         }
         resolve(data.data);
       });
