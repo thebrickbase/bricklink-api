@@ -75,7 +75,11 @@ export class Client {
         } catch (parseError) {
           reject(parseError);
         }
-        resolve(data.data);
+        if (data && data.data) {
+          resolve(data.data);
+        } else {
+          reject(new Error('Data not set'));
+        }
       });
     });
 
